@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 import * as LibraryController from "../controllers/libraryController";
 
 function LibraryView() {
-  const [books, setBooks] = useState([]);
-  const [newBook, setNewBook] = useState({ book: "", author: "", stars: "" });
+  const [books, setBooks] = useState<Book[]>([]);
+  const [newBook, setNewBook] = useState<NewBook>({
+    book: "",
+    author: "",
+    stars: 0,
+  });
 
   useEffect(() => {
     async function fetchBooks() {
@@ -16,19 +20,19 @@ function LibraryView() {
     fetchBooks();
   }, []);
 
-  const handleEdit = (id, field, value) => {
+  const handleEdit = (id: BookId, field: any, value: any) => {
     setBooks(
       books.map((book) => (book.id === id ? { ...book, [field]: value } : book))
     );
   };
 
-  const handleUpdate = async (id) => {
+  const handleUpdate = async (id: BookId) => {
     const bookToUpdate = books.find((book) => book.id === id);
 
-    await LibraryController.editBook(bookToUpdate);
+    await LibraryController.editBook(bookToUpdate!);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: BookId) => {
     await LibraryController.deleteBook(id);
     setBooks(books.filter((book) => book.id !== id));
   };
@@ -38,7 +42,7 @@ function LibraryView() {
     const books = await LibraryController.getLibrary();
 
     setBooks(books);
-    setNewBook({ book: "", author: "", stars: "" });
+    setNewBook({ book: "", author: "", stars: 0 });
   };
 
   return (
@@ -74,7 +78,8 @@ function LibraryView() {
               <td>
                 <input
                   style={{ textAlign: "center" }}
-                  value={book.stars}
+                  value={book.stars!}
+                  type="number"
                   onChange={(e) => handleEdit(book.id, "stars", e.target.value)}
                 />
               </td>
@@ -114,9 +119,10 @@ function LibraryView() {
           <td>
             <input
               style={{ textAlign: "center", backgroundColor: "lightgray" }}
-              value={newBook.stars}
+              value={newBook.stars!}
+              type="number"
               onChange={(e) =>
-                setNewBook({ ...newBook, stars: e.target.value })
+                setNewBook({ ...newBook, stars: Number(e.target.value) })
               }
             />
           </td>

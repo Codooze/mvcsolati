@@ -4,14 +4,14 @@ export function getLibrary() {
   return libraryModel.getBooks();
 }
 
-export function editBook(id, data) {
-  return libraryModel.editBook(id, data);
+export function editBook(data: Book) {
+  return libraryModel.editBook(data);
 }
 
-export function deleteBook(id) {
+export function deleteBook(id: BookId) {
   return libraryModel.deleteBook(id);
 }
 
-export function createBook(data) {
+export function createBook(data: NewBook) {
   return libraryModel.createBook(data);
 }
