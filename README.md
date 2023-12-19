@@ -1,93 +1,33 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# Proyecto de Biblioteca con Next.js y Supabase
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+Este proyecto es una aplicación web de biblioteca construida con Next.js y Supabase. Permite a los usuarios gestionar una colección de libros, incluyendo la creación, edición y eliminación de libros.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## Cómo ejecutar el proyecto
 
-## Features
+Para ejecutar este proyecto, primero necesitas instalar las dependencias. Puedes hacerlo con el siguiente comando:
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+```sh
+pnpm i
+```
 
-## Demo
+Una vez que las dependencias estén instaladas, puedes iniciar el proyecto con:
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+```sh
+pnpm run dev
+```
 
-## Deploy to Vercel
+¡Y eso es todo! Ahora deberías poder ver el proyecto ejecutándose en tu navegador local.
 
-Vercel deployment will guide you through creating a Supabase account and project.
+## Puntos clave del proyecto
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+Este proyecto utiliza Next.js como marco de trabajo de front-end y Supabase para la gestión de la base de datos. Aquí están algunos de los puntos clave:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This%20starter%20configures%20Supabase%20Auth%20to%20use%20cookies%2C%20making%20the%20user's%20session%20available%20throughout%20the%20entire%20Next.js%20app%20-%20Client%20Components%2C%20Server%20Components%2C%20Route%20Handlers%2C%20Server%20Actions%20and%20Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
+- **Modelo de la biblioteca**: El modelo de la biblioteca se encuentra en [`app/models/libraryModel.ts`](command:_github.copilot.openSymbolInFile?%5B%22app%2Fmodels%2FlibraryModel.ts%22%2C%22app%2Fmodels%2FlibraryModel.ts%22%5D "app/models/libraryModel.ts"). Este archivo contiene funciones para interactuar con la base de datos de Supabase, incluyendo `getBooks`, `editBook`, `deleteBook` y `createBook`.
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+- **Controlador de la biblioteca**: El controlador de la biblioteca se encuentra en [`app/controllers/libraryController.ts`](command:_github.copilot.openSymbolInFile?%5B%22app%2Fcontrollers%2FlibraryController.ts%22%2C%22app%2Fcontrollers%2FlibraryController.ts%22%5D "app/controllers/libraryController.ts"). Este archivo actúa como un puente entre el modelo y la vista, y contiene lógica adicional para procesar los datos que devuelve el modelo.
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+- **Vista de la biblioteca**: La vista de la biblioteca se encuentra en [`app/views/LibraryView.tsx`](command:_github.copilot.openSymbolInFile?%5B%22app%2Fviews%2FLibraryView.tsx%22%2C%22app%2Fviews%2FLibraryView.tsx%22%5D "app/views/LibraryView.tsx"). Este archivo es un componente React que muestra la interfaz de usuario de la biblioteca y maneja la interacción del usuario.
 
-## Clone and run locally
+## Nota sobre las claves secretas
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
-
-2. Create a Next.js app using the Supabase Starter template npx command
-
-   ```bash
-   npx create-next-app -e with-supabase
-   ```
-
-3. Use `cd` to change into the app's directory
-
-   ```bash
-   cd name-of-new-app
-   ```
-
-4. Rename `.env.local.example` to `.env.local` and update the following:
-
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
-
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
-
-5. You can now run the Next.js local development server:
-
-   ```bash
-   npm run dev
-   ```
-
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
-
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
-
-## Feedback and issues
-
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+Para facilitar la configuración, he quitado el archivo [`.env.local`](command:_github.copilot.openRelativePath?%5B%22.env.local%22%5D ".env.local") del [`.gitignore`](command:_github.copilot.openRelativePath?%5B%22.gitignore%22%5D ".gitignore"). Esto significa que las claves secretas necesarias para el proyecto están disponibles en el repositorio. Sin embargo, en un entorno de producción, estas claves deberían mantenerse en secreto y no incluirse en el control de versiones.
